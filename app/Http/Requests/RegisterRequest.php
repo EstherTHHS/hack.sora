@@ -4,6 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Response;
+
+use Illuminate\Http\Exceptions\HttpResponseException;
+
 class RegisterRequest extends FormRequest
 {
     /**
@@ -27,7 +32,28 @@ class RegisterRequest extends FormRequest
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|confirmed|min:8',
             'status'=>'',
-            'role' => 'required'
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json([
+                'success' => 0,
+                'code' => Response::HTTP_UNPROCESSABLE_ENTITY,
+                'meta' => [
+                    'method' => $this->getMethod(),
+                    'endpoint' => $this->path(),
+                    'limit' => $this->input('limit', 0),
+                    'offset' => $this->input('offset', 0),
+                    'total' => 0,
+                ],
+                'data' => [
+                    'message' => 'The given data was invalid.',
+                    'errors' => $validator->errors(),
+                ],
+                'duration' => (float)sprintf("%.3f", (microtime(true) - LARAVEL_START)),
+            ], Response::HTTP_UNPROCESSABLE_ENTITY)
+        );
     }
 }

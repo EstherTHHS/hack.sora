@@ -13,9 +13,7 @@ class UserService
     public function storeUser($data)
     {
         $user = User::create($data);
-        if (isset($data['role'])) {
-            $user->assignRole($data['role']);
-        }
+        $user->assignRole('User');
         return $user;
     }
 

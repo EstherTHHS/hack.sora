@@ -61,11 +61,12 @@ class AuthController extends Controller
             if ( Auth::attempt(['email'=>$request->email,'password' => $request->password])) {
                 $user = Auth::user();
                 $success['token']=  $user->createToken('User API')->plainTextToken;
-                // $success['token']=str_replace('laravel_sanctum_', '',  $token);
-                $success['id'] = $user->id;
 
+                $success['id'] = $user->id;
                 $success['name'] =  $user->name;
-                $success['role'] = $user->getRoleNames();
+                $success['email'] =  $user->email;
+                $userRoles = $user->getRoleNames();
+                $success['role'] = $userRoles->first();
                 $success['permission'] = $user->getPermissionsViaRoles()->pluck('name');
                 return response()->success($request,$success, 'User Login Successfully', 200, $startTime,1);
             } else {
