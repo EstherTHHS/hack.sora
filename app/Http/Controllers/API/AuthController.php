@@ -70,7 +70,7 @@ class AuthController extends Controller
                 $success['permission'] = $user->getPermissionsViaRoles()->pluck('name');
                 return response()->success($request,$success, 'User Login Successfully', 200, $startTime,1);
             } else {
-                return response()->error($request, null, 'Email & Password does not match with our record.', 500, $startTime);
+                return response()->error($request, null, 'Email & Password does not match with our record.', 401, $startTime);
             }
         } catch (Exception $e) {
 
