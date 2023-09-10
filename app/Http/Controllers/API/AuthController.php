@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -52,7 +52,7 @@ class AuthController extends Controller
 
 
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         try {
             $startTime = microtime(true);
@@ -69,10 +69,14 @@ class AuthController extends Controller
                 $success['role'] = $userRoles->first();
                 $success['permission'] = $user->getPermissionsViaRoles()->pluck('name');
                 return response()->success($request,$success, 'User Login Successfully', 200, $startTime,1);
+
             } else {
+                Log::channel('sora_error_log')->error('Login Error' . "Email & Password does not match  with our record.");
+
                 return response()->error($request, null, 'Email & Password does not match with our record.', 401, $startTime);
             }
         } catch (Exception $e) {
+          Log::channel('sora_error_log')->error('Login Error' . $e->getMessage());
 
             return response()->error($request, null, $e->getMessage(), 500, $startTime);
         }
