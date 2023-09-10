@@ -18,8 +18,9 @@ use App\Http\Controllers\API\UserController;
 */
 
 
-    Route::group(['middleware' => 'auth:sanctum','prefix' => 'hack'], function () {
+    Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::apiResource('/projects', ProjectController::class);
+        Route::post('auth/logout',[AuthController::class,'logout']);
     });
 
 

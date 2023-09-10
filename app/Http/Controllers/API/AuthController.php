@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
+
+
 class AuthController extends Controller
 {
     private AuthService $authService;
@@ -31,7 +33,7 @@ class AuthController extends Controller
     {
         $this->authService = $authService;
     }
-   
+
 
 
     public function login(LoginRequest $request)
@@ -40,9 +42,9 @@ class AuthController extends Controller
             $startTime = microtime(true);
             $user = User::where('email', $request->email)->first();
 
-            if ( Auth::attempt(['email'=>$request->email,'password' => $request->password])) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = Auth::user();
-                $success['token']=  $user->createToken('User API')->plainTextToken;
+                $success['token'] =  $user->createToken('User API')->plainTextToken;
 
                 $success['id'] = $user->id;
                 $success['name'] =  $user->name;
@@ -50,18 +52,26 @@ class AuthController extends Controller
                 $userRoles = $user->getRoleNames();
                 $success['role'] = $userRoles->first();
                 $success['permission'] = $user->getPermissionsViaRoles()->pluck('name');
-                return response()->success($request,$success, 'User Login Successfully', 200, $startTime,1);
-
+                return response()->success($request, $success, 'User Login Successfully', 200, $startTime, 1);
             } else {
                 Log::channel('sora_error_log')->error('Login Error' . "Email & Password does not match  with our record.");
 
                 return response()->error($request, null, 'Email & Password does not match with our record.', 401, $startTime);
             }
         } catch (Exception $e) {
-          Log::channel('sora_error_log')->error('Login Error' . $e->getMessage());
+            Log::channel('sora_error_log')->error('Login Error' . $e->getMessage());
 
             return response()->error($request, null, $e->getMessage(), 500, $startTime);
         }
     }
 
+
+    public function logout(Request $request)
+    {
+        $startTime = microtime(true);
+        $request->user()->currentAccessToken()->delete();
+        return response()->success($request,[], 'Log out Successfully', 200, $startTime, 1);
+
+
+    }
 }

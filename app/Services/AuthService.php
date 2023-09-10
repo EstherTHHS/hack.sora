@@ -21,14 +21,6 @@ class AuthService
     }
 
 
-    // public function logout($userId)
-    // {
-    //     $storedToken = session('authData');
-
-    //     if ($userId === $storedToken['id']) {
-    //         return  session()->flush();
-    //     }
-    // }
 
 
 
