@@ -126,6 +126,13 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+
+        'sora_error_log' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/sora_error_log.log'),
+            'level' => 'debug',
+        ],
     ],
 
 ];

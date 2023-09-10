@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -52,6 +53,7 @@ class UserController extends Controller
 
             return response()->success($request, $data, 'User Register Successfully.', 201, $startTime, 1);
         } catch (Exception $e) {
+            Log::channel('sora_error_log')->error('Register Error' . $e->getMessage());
             return response()->error($request, null, $e->getMessage(), 500, $startTime);
         }
     }

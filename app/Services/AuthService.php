@@ -15,49 +15,26 @@ class AuthService
     {
 
         $data = array_merge($validatedData, ['password' => Hash::make($validatedData['password'])]);
-
         $user =  User::create($validatedData);
         $user->assignRole($data['role']);
         return $user;
     }
 
 
-
-    // public function login( $validatedData)
+    // public function logout($userId)
     // {
+    //     $storedToken = session('authData');
 
-
-
-    //     if(Auth::attempt(['email' =>  $validatedData->email, 'password' =>  $validatedData->password])){
-    //         // $user = User::where('email', $validatedData->email)->first();
-    //         $user = Auth::user();
-    //         $success['token'] =  $user->createToken('User Token')->plainTextToken;
-    //         $success['name'] =  $user->name;
-    //         $success['role'] = $user->getRoleNames();
-    //         $success['permission'] = $user->getPermissionViaRoles()->pluck('name');
-
-    //        return $success;
-    //     }
-    //     else{
-    //         // return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
+    //     if ($userId === $storedToken['id']) {
+    //         return  session()->flush();
     //     }
     // }
 
 
-//     public function login($validatedData)
-// {
-//     if (Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']])) {
-//         $user = Auth::user();
-//         $success['token'] = $user->createToken('User Token')->plainTextToken;
-//         $success['name'] = $user->name;
-//         $success['role'] = $user->getRoleNames();
-//         $success['permission'] = $user->getPermissionViaRoles()->pluck('name');
 
-//         return $success;
-//     } else {
-//         // Handle authentication failure here
-//     }
-// }
+
+
+
 
 }
 
