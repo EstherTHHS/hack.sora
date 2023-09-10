@@ -31,25 +31,7 @@ class AuthController extends Controller
     {
         $this->authService = $authService;
     }
-    //  public function login(LoginRequest $request)
-    // {
-    //     try {
-
-    //         $startTime = microtime(true);
-
-    //         $validatedData=$request->validated();
-
-    //         $data = $this->authService->login($validatedData);
-
-    //        return response()->success(request(), $data, "user login success", 200, microtime(true), 1);
-
-
-    //     } catch (Exception $e) {
-
-    //         return response()->error(request(), null, $e->getMessage(), 500,   $startTime);
-    //     };
-    // }
-
+   
 
 
     public function login(LoginRequest $request)
