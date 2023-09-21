@@ -42,7 +42,7 @@ class AuthController extends Controller
             $startTime = microtime(true);
             $user = User::where('email', $request->email)->first();
 
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'provider'== null,'key'==null])   ) {
                 $user = Auth::user();
                 $success['token'] =  $user->createToken('User API')->plainTextToken;
 
@@ -58,6 +58,23 @@ class AuthController extends Controller
 
                 return response()->error($request, null, 'Email & Password does not match with our record.', 401, $startTime);
             }
+        } catch (Exception $e) {
+            Log::channel('sora_error_log')->error('Login Error' . $e->getMessage());
+
+            return response()->error($request, null, $e->getMessage(), 500, $startTime);
+        }
+    }
+
+
+    public function socialLogin(Request $request)
+    {
+        try {
+            $startTime = microtime(true);
+            $user = User::where('provider', $request->provider,'key',$request->key)->first();
+if(!$user){
+
+}
+
         } catch (Exception $e) {
             Log::channel('sora_error_log')->error('Login Error' . $e->getMessage());
 

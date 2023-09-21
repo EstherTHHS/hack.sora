@@ -27,4 +27,5 @@ use App\Http\Controllers\API\UserController;
 
 Route::post('auth/register',[UserController::class,'store']);
 Route::post('auth/login',[AuthController::class,'login']);
+Route::post('social/login',[AuthController::class,'socialLogin']);
 
