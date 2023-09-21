@@ -66,21 +66,6 @@ class AuthController extends Controller
     }
 
 
-    public function socialLogin(Request $request)
-    {
-        try {
-            $startTime = microtime(true);
-            $user = User::where('provider', $request->provider,'key',$request->key)->first();
-if(!$user){
-
-}
-
-        } catch (Exception $e) {
-            Log::channel('sora_error_log')->error('Login Error' . $e->getMessage());
-
-            return response()->error($request, null, $e->getMessage(), 500, $startTime);
-        }
-    }
 
 
     public function logout(Request $request)

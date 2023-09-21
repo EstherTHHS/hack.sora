@@ -18,4 +18,13 @@ class UserService
     }
 
 
+    public function socialLogin($data)
+    {
+
+      return User::create($data);
+
+
+    }
+
+
 }
