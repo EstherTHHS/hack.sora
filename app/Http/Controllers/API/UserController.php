@@ -58,97 +58,41 @@ class UserController extends Controller
         }
     }
 
-    // public function socialLogin(Request $request)
-    // {
 
-
-    //     try {
-    //         $startTime = microtime(true);
-    //         $user = User::where('provider', $request->provider)->where('key', $request->key)->first();
-
-    //         if($user=null){
-    //             $data=$this->service->socialLogin($request);
-    //             $success['token'] = $user->createToken('User API')->plainTextToken;
-    //             $success['user'] = $data;
-    //             return response()->success($request, $success, 'User Login Successfully', 200, $startTime, 1);
-    //         }
-    //         if (Auth::attempt(['provider' => $request->provider, 'key' => $request->key])) {
-    //             $user = Auth::user();
-    //             $success['token'] =  $user->createToken('User API')->plainTextToken;
-
-    //             return response()->success($request, $success, 'User Login and Create Successfully', 200, $startTime, 1);
-    //         }
-
-
-    //     } catch (Exception $e) {
-    //         Log::channel('sora_error_log')->error('Login Error' . $e->getMessage());
-
-    //         return response()->error($request, null, $e->getMessage(), 500, $startTime);
-    //     }
-    // }
-
-
-
-    // public function socialLogin(SocialLoginRequest $request)
-    // {
-
-
-
-    //     $startTime = microtime(true);
-
-    //     try {
-    //         $user = User::where('provider', $request->provider)->where('key', $request->key)->where('name',$request->name)->first();
-    //         if ($user == null) {
-    //             $validatedData = $request->validated();
-    //             $data = $this->service->socialLogin($validatedData);
-
-    //             Auth::login($user);
-    //             $success['token'] = $user->createToken('User API')->plainTextToken;
-    //             return response()->success($request, $success, 'User  Create Successfully', 200, $startTime, 1);
-    //         } else {
-    //             Auth::login($user);
-    //             $success['token'] = $user->createToken('User API')->plainTextToken;
-    //             return response()->success($request, $success, 'User Login and Create Successfully', 200, $startTime, 1);
-    //         }
-    //     } catch (Exception $e) {
-    //         Log::channel('sora_error_log')->error('Register Error' . $e->getMessage());
-    //         return response()->error($request, null, $e->getMessage(), 500, $startTime);
-    //     }
-    // }
 
     public function socialLogin(SocialLoginRequest $request)
-{
-    $startTime = microtime(true);
+    {
+        $startTime = microtime(true);
 
-    try {
-        $user = User::where('provider', $request->provider)
-                    ->where('key', $request->key)
-                    ->where('name', $request->name)
-                    ->first();
+        try {
+            $user = User::where('provider', $request->provider)
+                ->where('key', $request->key)
+                ->where('name', $request->name)
+                ->first();
 
-        if ($user == null) {
+            if ($user == null) {
 
-            $validatedData = $request->validated();
-            $user = $this->service->socialLogin($validatedData);
+                $validatedData = $request->validated();
+                $user = $this->service->socialLogin($validatedData);
+            }
+
+
+            if ($user) {
+
+                Auth::login($user);
+                $success['token'] = $user->createToken('User API')->plainTextToken;
+                $success['name'] = $user->name;
+                $success['email'] = $user->email;
+                return response()->success($request, $success, 'User Login Successful', 200, $startTime, 1);
+            } else {
+
+                return response()->error($request, null, 'User Not Found', 404, $startTime);
+            }
+        } catch (Exception $e) {
+            Log::channel('sora_error_log')->error('Social Login Error: ' . $e->getMessage());
+            return response()->error($request, null, 'Internal Server Error', 500, $startTime);
         }
-
-
-        if ($user) {
-
-            Auth::login($user);
-            $success['token'] = $user->createToken('User API')->plainTextToken;
-            $success['name']=$user->name;
-            $success['email']=$user->email;
-            return response()->success($request, $success, 'User Login Successful', 200, $startTime, 1);
-        } else {
-
-            return response()->error($request, null, 'User Not Found', 404, $startTime);
-        }
-    } catch (Exception $e) {
-        Log::channel('sora_error_log')->error('Social Login Error: ' . $e->getMessage());
-        return response()->error($request, null, 'Internal Server Error', 500, $startTime);
     }
-}
 
 
 
