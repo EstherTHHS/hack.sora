@@ -21,9 +21,9 @@ class UserService
     public function socialLogin($data)
     {
 
-      return User::create($data);
-
-
+      $user= User::create($data);
+      $user->assignRole('User');
+      return $user;
     }
 
 

@@ -36,34 +36,68 @@ class AuthController extends Controller
 
 
 
-    public function login(LoginRequest $request)
-    {
-        try {
-            $startTime = microtime(true);
-            $user = User::where('email', $request->email)->first();
+    // public function login(LoginRequest $request)
+    // {
+    //     try {
+    //         $startTime = microtime(true);
+    //         $user = User::where('email', $request->email)->first();
 
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'provider'== null,'key'==null])   ) {
+    //         if (Auth::attempt(['email' => $request->email, 'password' => $request->password ])    ) {
+    //             $user = Auth::user();
+    //             $success['token'] =  $user->createToken('User API')->plainTextToken;
+
+    //             $success['id'] = $user->id;
+    //             $success['name'] =  $user->name;
+    //             $success['email'] =  $user->email;
+    //             $userRoles = $user->getRoleNames();
+    //             $success['role'] = $userRoles->first();
+    //             $success['permission'] = $user->getPermissionsViaRoles()->pluck('name');
+    //             return response()->success($request, $success, 'User Login Successfully', 200, $startTime, 1);
+    //         } else {
+    //             Log::channel('sora_error_log')->error('Login Error' . "Email & Password does not match  with our record.");
+
+    //             return response()->error($request, null, 'Email & Password does not match with our record.', 401, $startTime);
+    //         }
+    //     } catch (Exception $e) {
+    //         Log::channel('sora_error_log')->error('Login Error' . $e->getMessage());
+
+    //         return response()->error($request, null, $e->getMessage(), 500, $startTime);
+    //     }
+    // }
+
+    public function login(LoginRequest $request)
+{
+    try {
+        $startTime = microtime(true);
+        $user = User::where('email', $request->email)->first();
+
+        // Check if the user exists and does not have a provider or key
+        if ($user && $user->provider === null && $user->key === null) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $user = Auth::user();
-                $success['token'] =  $user->createToken('User API')->plainTextToken;
+                $success['token'] = $user->createToken('User API')->plainTextToken;
 
                 $success['id'] = $user->id;
-                $success['name'] =  $user->name;
-                $success['email'] =  $user->email;
+                $success['name'] = $user->name;
+                $success['email'] = $user->email;
                 $userRoles = $user->getRoleNames();
                 $success['role'] = $userRoles->first();
                 $success['permission'] = $user->getPermissionsViaRoles()->pluck('name');
                 return response()->success($request, $success, 'User Login Successfully', 200, $startTime, 1);
             } else {
-                Log::channel('sora_error_log')->error('Login Error' . "Email & Password does not match  with our record.");
-
-                return response()->error($request, null, 'Email & Password does not match with our record.', 401, $startTime);
+                Log::channel('sora_error_log')->error('Login Error: Email & Password does not match with our record.');
+                return response()->error($request, null, 'Email & Password do not match with our record.', 401, $startTime);
             }
-        } catch (Exception $e) {
-            Log::channel('sora_error_log')->error('Login Error' . $e->getMessage());
-
-            return response()->error($request, null, $e->getMessage(), 500, $startTime);
+        } else {
+            Log::channel('sora_error_log')->error('Login Error: User not found or associated with a provider or key.');
+            return response()->error($request, null, 'User not found or associated with a provider or key.', 401, $startTime);
         }
+    } catch (Exception $e) {
+        Log::channel('sora_error_log')->error('Login Error: ' . $e->getMessage());
+        return response()->error($request, null, 'Internal Server Error', 500, $startTime);
     }
+}
+
 
 
 

@@ -80,9 +80,14 @@ class UserController extends Controller
             if ($user) {
 
                 Auth::login($user);
-                $success['token'] = $user->createToken('User API')->plainTextToken;
+                $success['id'] = $user->id;
                 $success['name'] = $user->name;
                 $success['email'] = $user->email;
+                $success['token'] = $user->createToken('User API')->plainTextToken;
+                $userRoles = $user->getRoleNames();
+                $success['role'] = $userRoles->first();
+                $success['permission'] = $user->getPermissionsViaRoles()->pluck('name');
+
                 return response()->success($request, $success, 'User Login Successful', 200, $startTime, 1);
             } else {
 
