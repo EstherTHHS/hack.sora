@@ -26,8 +26,8 @@ class SocialLoginRequest extends FormRequest
     {
 
         return [
-            'name'=>'',
-            'email'=>'',
+            'name'=>'required',
+            'email'=>'required',
             'password'=>'',
             'provider'=>'required',
             'key'=>'required',
