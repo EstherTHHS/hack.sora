@@ -19,15 +19,26 @@ class RoleAndPermissionSeeder extends Seeder
 
 
 
-        $projectList = Permission::create(['name' => 'projectList']);
-        $projectCreate = Permission::create(['name' => 'projectCreate']);
+        $itemList = Permission::create(['name' => 'itemList']);
+        $itemCreate = Permission::create(['name' => 'itemCreate']);
+        $itemEdit = Permission::create(['name' => 'itemEdit']);
+        $itemDelete = Permission::create(['name' => 'itemDelete']);
+        $itemShow = Permission::create(['name' => 'itemShow']);
+        $deleteItemImage = Permission::create(['name' => 'deleteItemImage']);
+
+
         // $userCreate=Permission::create(['name' => 'userCreate']);
 
         $admin->givePermissionTo([
 
 
-            $projectList,
-            $projectCreate,
+            $itemList,
+            $itemCreate,
+            $itemEdit,
+            $itemDelete,
+            $itemShow,
+            $deleteItemImage
+
 
 
 
@@ -38,7 +49,12 @@ class RoleAndPermissionSeeder extends Seeder
         $user->givePermissionTo([
 
 
-            $projectList,
+            $itemList,
+            // $itemCreate,
+            // $itemEdit,
+            // $itemDelete,
+            $itemShow,
+            // $deleteItemImage
 
 
         ]);

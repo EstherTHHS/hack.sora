@@ -16,8 +16,8 @@ class ProjectController extends Controller
     public function __construct(ProjectService $service)
     {
         $this->service = $service;
-        $this->middleware('permission:projectList', ['only' => 'index']);
-        $this->middleware('permission:projectCreate', ['only' => ['store']]);
+        // $this->middleware('permission:projectList', ['only' => 'index']);
+        // $this->middleware('permission:projectCreate', ['only' => ['store']]);
         // $this->middleware('permission:projectedit', ['only' => ['update']]);
         // $this->middleware('permission:projectdelete', ['only' => 'destroy']);
         // $this->middleware('permission:projectshow', ['only' => 'show']);

@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Response;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Response;
 use Illuminate\Http\Exceptions\HttpResponseException;
-class SocialLoginRequest extends FormRequest
+
+class ItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +24,13 @@ class SocialLoginRequest extends FormRequest
      */
     public function rules(): array
     {
-
         return [
             'name'=>'required',
-            'email'=>'required',
-            'password'=>'',
-            'provider'=>'required',
-            'key'=>'required',
-            'status'=>'',
+            'description'=>'required',
+            'price'=>'required',
+            'category'=>'required',
+            'stock'=>'required',
+            'image_url'=>'required|mimes:jpeg,png,jpg,pdf|dimensions:min_width=50,min_height=50|max:10240',
         ];
     }
 
