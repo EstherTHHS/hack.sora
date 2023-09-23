@@ -31,7 +31,7 @@ use App\Http\Controllers\API\UserController;
     Route::apiResource('/items', ItemController::class);
 
 Route::delete('delete/item-image/{id}',[ItemController::class,'deleteItemImage']);
-
+Route::get('item/category/{category}',[ItemController::class,'getItemByCategory']);
 Route::post('auth/register',[UserController::class,'store']);
 Route::post('auth/login',[AuthController::class,'login']);
 Route::post('auth/social/login',[UserController::class,'socialLogin']);

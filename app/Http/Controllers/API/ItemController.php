@@ -89,6 +89,25 @@ class ItemController extends Controller
         }
     }
 
+
+
+
+    public function getItemByCategory(Request $request,$categroy)
+    {
+        try {
+
+            $startTime = microtime(true);
+
+            $data = $this->itemService->getItemByCategory($categroy);
+
+            return response()->success($request, $data, 'Item Category list Successfully.', 200, $startTime, count($data));
+        } catch (Exception $e) {
+            Log::channel('sora_error_log')->error("Item Show Error" . $e->getMessage());
+            return response()->error($request, null, $e->getMessage(), 500, $startTime);
+        }
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      */
