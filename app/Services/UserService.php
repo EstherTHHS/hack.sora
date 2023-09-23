@@ -14,9 +14,6 @@ class UserService
     {
         $user = User::create($data);
         $user->assignRole('User');
-
-        $user->subscriptions()->sync($data['user_id']);
-
         return $user;
     }
 

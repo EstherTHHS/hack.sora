@@ -38,9 +38,9 @@ class SubscribeController extends Controller
 
                 $startTime = microtime(true);
 
-                // $validatedData = $request->validated();
+                $validatedData = $request->validated();
 
-                $data = $this->SubscribeService->subscribe($request);
+                $data = $this->SubscribeService->subscribe($validatedData);
 
                 return response()->success($request, $data, 'Subscription Create Successfully.', 201, $startTime, 1);
             } catch (Exception $e) {

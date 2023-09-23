@@ -70,6 +70,9 @@ class AuthController extends Controller
     try {
         $startTime = microtime(true);
         $user = User::where('email', $request->email)->first();
+        if($user->status ===0){
+            return response()->error($request, null, 'Your account is suspend', 400, $startTime);
+        }
 
         // Check if the user exists and does not have a provider or key
         if ($user && $user->provider === null && $user->key === null) {
