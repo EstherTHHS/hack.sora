@@ -30,6 +30,8 @@ class RoleAndPermissionSeeder extends Seeder
         $storeSubscribe=Permission::create(['name' => 'storeSubscribe']);
         $payment=Permission::create(['name' => 'payment']);
 
+        $userStatus=Permission::create(['name' => 'userStatus']);
+
 
         $admin->givePermissionTo([
 
@@ -42,7 +44,8 @@ class RoleAndPermissionSeeder extends Seeder
             $deleteItemImage,
             $getItemByCategory,
             $storeSubscribe,
-            $payment
+            $payment,
+            $userStatus
 
 
 

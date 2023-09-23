@@ -20,14 +20,26 @@ class UserController extends Controller
     public function __construct(UserService $service)
     {
         $this->service = $service;
-        // $this->middleware('permission:storeSubscribe', ['only' => 'store']);
+        $this->middleware('permission:userStatus', ['only' => 'userStatus']);
     }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //getUsers
+
+        try {
+
+            $startTime = microtime(true);
+
+            $data = $this->service->getUsers();
+
+            return response()->success($request, $data, 'User Lists Successfully.', 201, $startTime, 1);
+        } catch (Exception $e) {
+            Log::channel('sora_error_log')->error('User Lists Error' . $e->getMessage());
+            return response()->error($request, null, $e->getMessage(), 500, $startTime);
+        }
     }
 
     /**
@@ -44,19 +56,19 @@ class UserController extends Controller
     public function store(RegisterRequest $request)
     {
 
-        try {
+        // try {
 
-            $startTime = microtime(true);
+        //     $startTime = microtime(true);
 
-            $validatedData = $request->validated();
+        //     $validatedData = $request->validated();
 
-            $data = $this->service->storeUser($validatedData);
+        //     $data = $this->service->storeUser($validatedData);
 
-            return response()->success($request, $data, 'User Register Successfully.', 201, $startTime, 1);
-        } catch (Exception $e) {
-            Log::channel('sora_error_log')->error('Register Error' . $e->getMessage());
-            return response()->error($request, null, $e->getMessage(), 500, $startTime);
-        }
+        //     return response()->success($request, $data, 'User Register Successfully.', 201, $startTime, 1);
+        // } catch (Exception $e) {
+        //     Log::channel('sora_error_log')->error('Register Error' . $e->getMessage());
+        //     return response()->error($request, null, $e->getMessage(), 500, $startTime);
+        // }
     }
 
 
@@ -132,5 +144,40 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function register(RegisterRequest $request)
+    {
+
+        try {
+
+            $startTime = microtime(true);
+
+            $validatedData = $request->validated();
+
+            $data = $this->service->storeUser($validatedData);
+
+            return response()->success($request, $data, 'User Register Successfully.', 201, $startTime, 1);
+        } catch (Exception $e) {
+            Log::channel('sora_error_log')->error('Register Error' . $e->getMessage());
+            return response()->error($request, null, $e->getMessage(), 500, $startTime);
+        }
+    }
+
+
+    public function userStatus(Request $request,$id)
+    {
+
+        try {
+
+            $startTime = microtime(true);
+
+            $data = $this->service->userStatus($request,$id);
+
+            return response()->success($request, $data, 'User Status change  Successfully.', 200, $startTime, 1);
+        } catch (Exception $e) {
+            Log::channel('sora_error_log')->error('Error User Status change' . $e->getMessage());
+            return response()->error($request, null, $e->getMessage(), 500, $startTime);
+        }
     }
 }
