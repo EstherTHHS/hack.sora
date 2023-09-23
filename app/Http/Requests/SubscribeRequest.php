@@ -26,9 +26,12 @@ class SubscribeRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-           'item_id'=>'required|exists:items,id',
-           'type'=>'required',
+            'user_id'=>'required|exists:users,id',
+            'item_id'=>'required|array|exists:items,id',
+            'type'=>'required',
+            'status'=>'required',
+            'quantity'=>'required',
+            'buy_date'=>'required'
         ];
     }
 

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ItemController;
 use App\Http\Controllers\API\ProjectController;
+use App\Http\Controllers\API\SubscribeController;
 use App\Http\Controllers\API\UserController;
 
 /*
@@ -29,6 +30,7 @@ use App\Http\Controllers\API\UserController;
     });
 
     Route::apiResource('/items', ItemController::class);
+    Route::apiResource('/subscribe', SubscribeController::class);
 
 Route::delete('delete/item-image/{id}',[ItemController::class,'deleteItemImage']);
 Route::get('item/category/{category}',[ItemController::class,'getItemByCategory']);

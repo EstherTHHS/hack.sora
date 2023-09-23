@@ -36,16 +36,6 @@ class ItemRepository implements ItemRepositoryInterface
 
         return $items;
 
-
-
-        // $items->each(function ($item) {
-        //     $item->image_url = asset('image/' . $item->image_url);
-        // });
-        // $items->each(function ($item) {
-        //     $item->image_url = asset('image/' . $item->image_url);
-        // });
-
-        // return $items;
     }
 
     public function getItemByCategory($category)

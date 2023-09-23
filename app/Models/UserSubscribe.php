@@ -13,7 +13,8 @@ class UserSubscribe extends Model
     protected $fillable = [
         'user_id',
         'item_id',
-        'type'
+        'type',
+        'status'
 
     ];
 
@@ -32,6 +33,11 @@ class UserSubscribe extends Model
     public function item()
     {
         return $this->belongsTo(Item::class, 'item_id');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'user_subscribe_id', 'id');
     }
 
 

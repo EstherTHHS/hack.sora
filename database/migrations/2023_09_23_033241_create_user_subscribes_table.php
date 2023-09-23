@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('item_id');
             $table->string('type');
+            $table->boolean('status');
             $table->timestamps();
             $table->softDeletes();
         });
