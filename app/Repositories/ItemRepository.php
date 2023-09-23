@@ -11,14 +11,24 @@ class ItemRepository implements ItemRepositoryInterface
     public function getItems()
     {
 
-        return Item::get();
+        $items= Item::get();
+        $items->each(function ($item) {
+            $item->image_url = asset('itemImages/' . $item->image_url);
+        });
+
+        return $items;
+
     }
 
     public function getItemById($id)
     {
 
-        $data= Item::where('id',$id)->get();
-        return $data;
+        $items= Item::where('id',$id)->get();
+        $items->each(function ($item) {
+            $item->image_url = asset('itemImages/' . $item->image_url);
+        });
+
+        return $items;
 
     }
 }

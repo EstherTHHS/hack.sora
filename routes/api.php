@@ -24,11 +24,13 @@ use App\Http\Controllers\API\UserController;
 
         Route::post('auth/logout',[AuthController::class,'logout']);
 
-        Route::apiResource('/items', ItemController::class);
 
-        Route::delete('delete/item-image/{id}',[ItemController::class,'deleteItemImage']);
 
     });
+
+    Route::apiResource('/items', ItemController::class);
+
+Route::delete('delete/item-image/{id}',[ItemController::class,'deleteItemImage']);
 
 Route::post('auth/register',[UserController::class,'store']);
 Route::post('auth/login',[AuthController::class,'login']);
