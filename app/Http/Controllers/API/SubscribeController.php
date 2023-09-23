@@ -72,4 +72,24 @@ class SubscribeController extends Controller
     {
         //
     }
+
+    // public function payment(SubscribeRequest $request)
+    // {
+
+    //         try {
+
+    //             $startTime = microtime(true);
+
+    //             // $validatedData = $request->validated();
+
+    //             $data = $this->SubscribeService->subscribe($request);
+
+    //             return response()->success($request, $data, 'Subscription Create Successfully.', 201, $startTime, 1);
+    //         } catch (Exception $e) {
+    //             Log::channel('sora_error_log')->error("Subscription  Store Error" . $e->getMessage());
+    //             return response()->error($request, null, $e->getMessage(), 500, $startTime);
+    //         }
+
+    // }
+
 }

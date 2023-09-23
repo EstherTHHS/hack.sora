@@ -28,9 +28,9 @@ class SubscribeRequest extends FormRequest
         return [
             'user_id'=>'required|exists:users,id',
             'item_id'=>'required|array|exists:items,id',
-            'type'=>'required',
+            'type'=>'nullable|array',
             'status'=>'required',
-            'quantity'=>'required',
+            'quantity'=>'required|array',
             'buy_date'=>'required'
         ];
     }
