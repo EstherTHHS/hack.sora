@@ -39,19 +39,19 @@ class ItemService
 
     public function storeItem($validatedData)
     {
-            $image= $validatedData['image_url'];
-            $image_url = time() . "_" .  $image->getClientOriginalName();
-            $image->storeAs('image/' .  $image_url );
-            $data=Item::create([
-                'name'=>$validatedData['name'],
-                'description'=>$validatedData['description'],
-                'price'=>$validatedData['price'],
-                'category'=>$validatedData['category'],
-                'stock'=>$validatedData['stock'],
-                'image_url'=>$image_url,
-            ]);
+        $image= $validatedData['image_url'];
+        $image_url = time() . "_" .  $image->getClientOriginalName();
+        $image->storeAs('image/' .  $image_url );
+        $data=Item::create([
+            'name'=>$validatedData['name'],
+            'description'=>$validatedData['description'],
+            'price'=>$validatedData['price'],
+            'category'=>$validatedData['category'],
+            'stock'=>$validatedData['stock'],
+            'image_url'=>$image_url,
+        ]);
 
-            return $data;
+        return $data;
     }
 
 
