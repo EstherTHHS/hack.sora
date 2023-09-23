@@ -29,14 +29,23 @@ class ItemRepository implements ItemRepositoryInterface
     public function getItemById($id)
     {
 
-        $items = Item::where('id', $id)->first();
-
-
+        $items= Item::where('id',$id)->get();
         $items->each(function ($item) {
             $item->image_url = asset('image/' . $item->image_url);
         });
 
         return $items;
+
+
+
+        // $items->each(function ($item) {
+        //     $item->image_url = asset('image/' . $item->image_url);
+        // });
+        // $items->each(function ($item) {
+        //     $item->image_url = asset('image/' . $item->image_url);
+        // });
+
+        // return $items;
     }
 
     public function getItemByCategory($category)
