@@ -20,6 +20,7 @@ class UserController extends Controller
     public function __construct(UserService $service)
     {
         $this->service = $service;
+        // $this->middleware('permission:storeSubscribe', ['only' => 'store']);
     }
     /**
      * Display a listing of the resource.

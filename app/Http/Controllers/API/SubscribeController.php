@@ -18,6 +18,8 @@ class SubscribeController extends Controller
     public function __construct(SubscribeService $SubscribeService)
     {
         $this->SubscribeService =$SubscribeService;
+        $this->middleware('permission:storeSubscribe', ['only' => 'store']);
+        $this->middleware('permission:payment', ['only' => 'payment']);
 
     }
     /**
@@ -80,9 +82,7 @@ class SubscribeController extends Controller
             try {
 
                 $startTime = microtime(true);
-
                 $validatedData = $request->validated();
-
                 $data = $this->SubscribeService->payment($validatedData);
 
                 return response()->success($request, $data, 'Payment Create Successfully.', 201, $startTime, 1);

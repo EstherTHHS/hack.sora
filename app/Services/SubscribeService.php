@@ -4,8 +4,6 @@ namespace App\Services;
 
 use App\Models\Cart;
 use App\Models\Payment;
-use App\Models\User;
-use App\Models\Project;
 use App\Models\UserSubscribe;
 use Illuminate\Support\Facades\DB;
 

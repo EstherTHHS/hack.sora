@@ -29,7 +29,7 @@ class SubscribeRequest extends FormRequest
             'user_id'=>'required|exists:users,id',
             'item_id'=>'required|array|exists:items,id',
             'type'=>'nullable|array',
-            'status'=>'required',
+            // 'status'=>'',
             'quantity'=>'required|array',
             'buy_date'=>'required|date',
         ];
