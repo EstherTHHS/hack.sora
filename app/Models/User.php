@@ -49,4 +49,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function subscriptions()
+    {
+        return $this->hasMany(UserSubscribe::class, 'user_id');
+    }
+
+
+
+
 }

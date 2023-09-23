@@ -41,7 +41,7 @@ class ItemService
     {
             $image= $validatedData['image_url'];
             $image_url = time() . "_" .  $image->getClientOriginalName();
-            $image->storeAs('itemImages/' .  $image_url );
+            $image->storeAs('image/' .  $image_url );
             $data=Item::create([
                 'name'=>$validatedData['name'],
                 'description'=>$validatedData['description'],
@@ -66,7 +66,7 @@ class ItemService
             if ($validatedData->hasFile('image_url')) {
                 $image = $validatedData['image_url'];
                 $image_url = time() . "_" . $image->getClientOriginalName();
-                $image->storeAs('itemImages/', $image_url);
+                $image->storeAs('image/', $image_url);
                 $item->image_url = $image_url;
             }
 

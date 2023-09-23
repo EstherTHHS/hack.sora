@@ -25,4 +25,12 @@ class Item extends Model
         'deleted_at',
     ];
 
+
+    public function subscribers()
+    {
+        return $this->hasMany(UserSubscribe::class, 'item_id');
+    }
+
+
+
 }

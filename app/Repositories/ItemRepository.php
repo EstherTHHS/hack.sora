@@ -11,39 +11,43 @@ class ItemRepository implements ItemRepositoryInterface
     public function getItems()
     {
 
-        $items= Item::get();
+
+        $items= Item::all();
         $items->each(function ($item) {
-            $item->image_url = asset('itemImages/' . $item->image_url);
+            $item->image_url = asset('image/' . $item->image_url);
         });
 
         return $items;
-
     }
+
+
+
+
+
+
 
     public function getItemById($id)
     {
 
-        $items= Item::where('id',$id)->get();
+        $items = Item::where('id', $id)->first();
+
+
         $items->each(function ($item) {
-            $item->image_url = asset('itemImages/' . $item->image_url);
+            $item->image_url = asset('image/' . $item->image_url);
         });
 
         return $items;
-
     }
 
     public function getItemByCategory($category)
     {
 
-        $items= Item::where('category',$category)->get();
+        $items = Item::where('category', $category)->get();
+
         $items->each(function ($item) {
-            $item->image_url = asset('itemImages/' . $item->image_url);
+            $item->image_url = asset('image/' . $item->image_url);
         });
 
         return $items;
-
     }
 }
-
-
-
