@@ -30,6 +30,12 @@ class ItemService
 
 
 
+    public function getItemByCategory($category)
+    {
+        return $this->ItemRepoInterface->getItemByCategory($category);
+    }
+
+
 
     public function storeItem($validatedData)
     {
