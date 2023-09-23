@@ -24,7 +24,7 @@ class PaymentRequest extends FormRequest
         return [
             'cart_id'=>'required|exists:carts,id',
             'amount'=>'required',
-            'payment_date'=>'required|date_format:Y-m-d',
+            'payment_date'=>'required|date',
             'payment_method'=>'required'
         ];
     }

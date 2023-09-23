@@ -31,7 +31,7 @@ class SubscribeRequest extends FormRequest
             'type'=>'nullable|array',
             'status'=>'required',
             'quantity'=>'required|array',
-            'buy_date'=>'required',
+            'buy_date'=>'required|date',
         ];
     }
 
