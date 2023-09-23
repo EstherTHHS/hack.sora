@@ -3,13 +3,12 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Response;
-
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class RegisterRequest extends FormRequest
+
+class SubscribeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,16 +26,15 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|confirmed|min:8',
-            'status'=>'',
-            'phone'=>'required',
-            'address'=>'required'
-
+            'user_id'=>'required|exists:users,id',
+            'item_id'=>'required|array|exists:items,id',
+            'type'=>'nullable|array',
+            'status'=>'required',
+            'quantity'=>'required|array',
+            'buy_date'=>'required|date',
         ];
     }
+
 
     protected function failedValidation(Validator $validator)
     {

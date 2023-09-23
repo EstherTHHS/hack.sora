@@ -2,21 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Item extends Model
+class Payment extends Model
 {
     use HasFactory,SoftDeletes;
 
     protected $fillable = [
-        'name',
-        'description',
-        'price',
-        'category',
-        'stock',
-        'image_url',
+        'cart_id',
+        'amount',
+        'payment_date',
+        'payment_method'
     ];
 
     protected $hidden=[
@@ -25,12 +23,8 @@ class Item extends Model
         'deleted_at',
     ];
 
-
-    public function subscribers()
+    public function cart()
     {
-        return $this->hasMany(UserSubscribe::class, 'item_id');
+        return $this->belongsTo(Cart::class, 'cart_id');
     }
-
-
-
 }
