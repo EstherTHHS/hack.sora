@@ -22,10 +22,10 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cart_id',
-            'amount',
-            'payment_date',
-            'payment_method'
+            'cart_id'=>'required|exists:carts,id',
+            'amount'=>'required',
+            'payment_date'=>'required|date_format:Y-m-d',
+            'payment_method'=>'required'
         ];
     }
 }

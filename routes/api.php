@@ -29,9 +29,10 @@ use App\Http\Controllers\API\UserController;
 
     });
 
-    Route::apiResource('/items', ItemController::class);
-    Route::apiResource('/subscribe', SubscribeController::class);
+Route::apiResource('/items', ItemController::class);
+Route::apiResource('/subscribe', SubscribeController::class);
 
+Route::post('/payment',[SubscribeController::class,'payment']);
 Route::delete('delete/item-image/{id}',[ItemController::class,'deleteItemImage']);
 Route::get('item/category/{category}',[ItemController::class,'getItemByCategory']);
 Route::post('auth/register',[UserController::class,'store']);

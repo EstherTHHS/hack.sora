@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Services\SubscribeService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaymentRequest;
 use App\Http\Requests\SubscribeRequest;
 use Illuminate\Support\Facades\Log;
 
@@ -73,23 +74,23 @@ class SubscribeController extends Controller
         //
     }
 
-    // public function payment(SubscribeRequest $request)
-    // {
+    public function payment(PaymentRequest $request)
+    {
 
-    //         try {
+            try {
 
-    //             $startTime = microtime(true);
+                $startTime = microtime(true);
 
-    //             // $validatedData = $request->validated();
+                $validatedData = $request->validated();
 
-    //             $data = $this->SubscribeService->subscribe($request);
+                $data = $this->SubscribeService->payment($validatedData);
 
-    //             return response()->success($request, $data, 'Subscription Create Successfully.', 201, $startTime, 1);
-    //         } catch (Exception $e) {
-    //             Log::channel('sora_error_log')->error("Subscription  Store Error" . $e->getMessage());
-    //             return response()->error($request, null, $e->getMessage(), 500, $startTime);
-    //         }
+                return response()->success($request, $data, 'Payment Create Successfully.', 201, $startTime, 1);
+            } catch (Exception $e) {
+                Log::channel('sora_error_log')->error("Subscription  Store Error" . $e->getMessage());
+                return response()->error($request, null, $e->getMessage(), 500, $startTime);
+            }
 
-    // }
+    }
 
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('cart_id');
             $table->foreignId('amount');
-            $table->foreignId('payment_date');
+            $table->date('payment_date');
             $table->string('payment_method');
             $table->timestamps();
             $table->softDeletes();

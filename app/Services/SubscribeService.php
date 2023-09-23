@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Cart;
+use App\Models\Payment;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\UserSubscribe;
@@ -39,8 +40,9 @@ class SubscribeService
         });
     }
 
-    // public function payment($data)
-    // {
+    public function payment($data)
+    {
 
-    // }
+            return Payment::create($data);
+    }
 }
