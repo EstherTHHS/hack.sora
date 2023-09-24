@@ -47,11 +47,6 @@ class RoleAndPermissionSeeder extends Seeder
             $payment,
             $userStatus
 
-
-
-
-
-
         ]);
 
 
@@ -59,16 +54,12 @@ class RoleAndPermissionSeeder extends Seeder
 
 
             $itemList,
-            $itemCreate,
-            $itemEdit,
-            $itemDelete,
+
             $itemShow,
-            $deleteItemImage,
+
             $getItemByCategory,
             $storeSubscribe,
             $payment
-
-
         ]);
     }
 }
