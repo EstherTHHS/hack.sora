@@ -20,6 +20,10 @@ class UserController extends Controller
     public function __construct(UserService $service)
     {
         $this->service = $service;
+        $this->middleware('permission:userList', ['only' => 'index']);
+        $this->middleware('permission:userShow', ['only' => 'show']);
+        $this->middleware('permission:userUpdate', ['only' => 'update']);
+        $this->middleware('permission:userDestroy', ['only' => 'destroy']);
         $this->middleware('permission:userStatus', ['only' => 'userStatus']);
     }
     /**
@@ -117,9 +121,22 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request,string $id)
     {
-        //
+
+
+        try {
+
+            $startTime = microtime(true);
+
+
+            $data = $this->service->showUser($request,$id);
+
+            return response()->success($request, $data, 'User Show Successfully.', 201, $startTime, 1);
+        } catch (Exception $e) {
+            Log::channel('sora_error_log')->error('Register Error' . $e->getMessage());
+            return response()->error($request, null, $e->getMessage(), 500, $startTime);
+        }
     }
 
     /**
@@ -133,17 +150,41 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RegisterRequest $request, string $id)
     {
-        //
+      try {
+
+            $startTime = microtime(true);
+
+            $validatedData = $request->validated();
+
+            $data = $this->service->updateUser($validatedData,$id);
+
+            return response()->success($request, $data, 'User Update Successfully.', 201, $startTime, 1);
+        } catch (Exception $e) {
+            Log::channel('sora_error_log')->error('Register Error' . $e->getMessage());
+            return response()->error($request, null, $e->getMessage(), 500, $startTime);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request,$id)
     {
-        //
+        try {
+
+            $startTime = microtime(true);
+
+
+
+            $data = $this->service->destroy($request,$id);
+
+            return response()->success($request, $data, 'User Delete Successfully.', 200, $startTime, 1);
+        } catch (Exception $e) {
+            Log::channel('sora_error_log')->error('Register Error' . $e->getMessage());
+            return response()->error($request, null, $e->getMessage(), 500, $startTime);
+        }
     }
 
     public function register(RegisterRequest $request)
