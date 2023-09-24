@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('item_id');
             $table->integer('type')->nullable();
             $table->boolean('status');
+            $table->boolean('is_complete')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

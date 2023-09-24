@@ -8,16 +8,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cart extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'user_subscribe_id',
-        'item_id',
         'quantity',
         'buy_date'
     ];
 
-    protected $hidden=[
+    protected $hidden = [
         'created_at',
         'updated_at',
         'deleted_at',
@@ -28,13 +27,13 @@ class Cart extends Model
         return $this->belongsTo(UserSubscribe::class, 'user_subscribe_id');
     }
 
-    public function item()
-    {
-        return $this->belongsTo(Item::class, 'item_id');
-    }
+    public function carts()
+{
+    return $this->hasMany(Cart::class, 'user_subscribe_id');
+}
 
-    public function payment()
-    {
-        return $this->hasOne(Payment::class, 'cart_id');
-    }
+
+
+
+
 }

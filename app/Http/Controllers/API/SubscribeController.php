@@ -79,6 +79,7 @@ class SubscribeController extends Controller
     public function payment(PaymentRequest $request)
     {
 
+
             try {
 
                 $startTime = microtime(true);

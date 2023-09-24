@@ -2,23 +2,25 @@
 
 namespace App\Models;
 
+use App\Models\Cart;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UserSubscribe extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'user_id',
         'item_id',
         'type',
-        'status'
+        'status',
+        'is_complete'
 
     ];
 
-    protected $hidden=[
+    protected $hidden = [
         'created_at',
         'updated_at',
         'deleted_at',
@@ -35,14 +37,8 @@ class UserSubscribe extends Model
         return $this->belongsTo(Item::class, 'item_id');
     }
 
-    public function carts()
+    public function payment()
     {
-        return $this->hasMany(Cart::class, 'user_subscribe_id', 'id');
+        return $this->hasOne(Payment::class, 'subscribe_user_id', 'user_id');
     }
-
-
-
-
-
-
 }

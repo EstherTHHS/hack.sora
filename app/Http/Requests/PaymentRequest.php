@@ -24,7 +24,7 @@ class PaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cart_id'=>'required|exists:carts,id',
+            'subscribe_user_id'=>'required',
             'amount'=>'required',
             'payment_date'=>'required|date',
             'payment_method'=>'required'
