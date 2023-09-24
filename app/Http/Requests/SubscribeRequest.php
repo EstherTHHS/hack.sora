@@ -26,16 +26,13 @@ class SubscribeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id'=>'required|exists:users,id',
-            'item_id'=>'required|array|exists:items,id',
-            'type'=>'nullable|array',
-            'is_complete'=>'nullable',
-            'quantity'=>'required|array',
-            'buy_date'=>'required|date',
-            'subscribe_user_id'=>'required',
-            'amount'=>'required',
-            'payment_date'=>'required|date',
-            'payment_method'=>'required'
+            'items' => 'required|array',
+            'items.*.item_id' => 'required',
+            'items.*.type' => 'nullable',
+            'items.*.quantity' => 'required',
+            'items.*.buy_date' => 'required',
+            'items.*.amount' => 'required',
+            'items.*.payment_method' => 'required',
         ];
     }
 

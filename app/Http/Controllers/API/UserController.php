@@ -20,11 +20,11 @@ class UserController extends Controller
     public function __construct(UserService $service)
     {
         $this->service = $service;
-        $this->middleware('permission:userList', ['only' => 'index']);
-        $this->middleware('permission:userShow', ['only' => 'show']);
-        $this->middleware('permission:userUpdate', ['only' => 'update']);
-        $this->middleware('permission:userDestroy', ['only' => 'destroy']);
-        $this->middleware('permission:userStatus', ['only' => 'userStatus']);
+        // $this->middleware('permission:userList', ['only' => 'index']);
+        // $this->middleware('permission:userShow', ['only' => 'show']);
+        // $this->middleware('permission:userUpdate', ['only' => 'update']);
+        // $this->middleware('permission:userDestroy', ['only' => 'destroy']);
+        // $this->middleware('permission:userStatus', ['only' => 'userStatus']);
     }
     /**
      * Display a listing of the resource.
