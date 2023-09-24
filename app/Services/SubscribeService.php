@@ -64,7 +64,7 @@ class SubscribeService
 
             $userSubscribe = UserSubscribe::create([
                 'user_id' => $userId,
-                'item_id' => $item['item'],
+                'item_id' => $item['item_id'],
                 'type' => $item['type'],
                 'status' => $status,
                 'is_complete' => 1
