@@ -35,23 +35,10 @@ class SubscribeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(SubscribeRequest $request)
-    // {
+    public function store(Request $request)
+    {
 
-
-    //         try {
-
-    //             $startTime = microtime(true);
-    //             $requestData = $request->json()->all();
-    //             $data = $this->SubscribeService->subscribe($requestData);
-
-    //             return response()->success($request, $data, 'Subscription Create Successfully.', 201, $startTime, 1);
-    //         } catch (Exception $e) {
-    //             Log::channel('sora_error_log')->error("Subscription  Store Error" . $e->getMessage());
-    //             return response()->error($request, null, $e->getMessage(), 500, $startTime);
-    //         }
-
-    // }
+    }
 
 
 
@@ -62,9 +49,6 @@ class SubscribeController extends Controller
 
         try {
             $startTime = microtime(true);
-
-
-
 
            $data= $this->SubscribeService->subscribePayment($request->all(), $userId);
 

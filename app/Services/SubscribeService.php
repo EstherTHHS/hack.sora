@@ -12,42 +12,6 @@ use Illuminate\Http\Client\Request;
 class SubscribeService
 {
 
-//    public function subscribe($datas)
-// {
-
-//     return DB::transaction(function () use ($datas) {
-//         $carts = [];
-
-//         foreach ($datas as $data) {
-//             $status = is_null($data['type']) ? 0 : 1;
-
-//             $userSubscribe = UserSubscribe::create([
-//                 'user_id' => $data['user_id'],
-//                 'item_id' => $data['item_id'],
-//                 'type' => $data['type'],
-//                 'status' => $status,
-//                 'is_complete' => 1
-//             ]);
-
-//             $cart = Cart::create([
-//                 'user_subscribe_id' => $userSubscribe->id,
-//                 'quantity' => $data['quantity'],
-//                 'buy_date' => $data['buy_date'],
-//             ]);
-
-//             $carts[] = $cart;
-
-//             Payment::create([
-//                 'subscribe_user_id' => $data['user_id'],
-//                 'amount' => $data['amount'],
-//                 'payment_date' => $data['buy_date'],
-//                 'payment_method' => $data['payment_method'],
-//             ]);
-//         }
-
-//         return $carts;
-//     });
-// }
 
 
 
