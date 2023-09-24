@@ -78,14 +78,17 @@ class ItemController extends Controller
     public function show(int $id,Request $request)
     {
         try {
-
             $startTime = microtime(true);
 
             $data = $this->itemService->getItemById($id);
 
-            return response()->success($request, $data, 'Item Show Successfully.', 200, $startTime, count($data));
+            if ($data) {
+                return response()->success($request, $data, 'Item Show Successfully.', 200, $startTime, count($data['relatedItems']));
+            } else {
+                return response()->error($request, null, 'Item not found', 404, $startTime);
+            }
         } catch (Exception $e) {
-            Log::channel('sora_error_log')->error("Item Show Error" . $e->getMessage());
+            Log::channel('sora_error_log')->error("Item Show Error: " . $e->getMessage());
             return response()->error($request, null, $e->getMessage(), 500, $startTime);
         }
     }
