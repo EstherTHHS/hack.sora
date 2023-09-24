@@ -35,44 +35,27 @@ class SubscribeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(SubscribeRequest $request)
-    {
-
-
-            try {
-
-                $startTime = microtime(true);
-                $requestData = $request->json()->all();
-                $data = $this->SubscribeService->subscribe($requestData);
-
-                return response()->success($request, $data, 'Subscription Create Successfully.', 201, $startTime, 1);
-            } catch (Exception $e) {
-                Log::channel('sora_error_log')->error("Subscription  Store Error" . $e->getMessage());
-                return response()->error($request, null, $e->getMessage(), 500, $startTime);
-            }
-
-    }
-
-
-
-    // public function subscribePayment(Request $request,$userId)
+    // public function store(SubscribeRequest $request)
     // {
 
 
-    //     try {
-    //         $startTime = microtime(true);
+    //         try {
 
-    //         $validatedData = $request->all();
+    //             $startTime = microtime(true);
+    //             $requestData = $request->json()->all();
+    //             $data = $this->SubscribeService->subscribe($requestData);
 
-    //         $this->SubscribeService->subscribePayment($validatedData, $userId);
-
-    //         return response()->success($request, null, 'Subscription Create Successfully.', 201, $startTime, 1);
-    //     } catch (Exception $e) {
-    //         Log::channel('sora_error_log')->error("Subscription Store Error: " . $e->getMessage());
-    //         return response()->error($request, null, $e->getMessage(), 500, $startTime);
-    //     }
+    //             return response()->success($request, $data, 'Subscription Create Successfully.', 201, $startTime, 1);
+    //         } catch (Exception $e) {
+    //             Log::channel('sora_error_log')->error("Subscription  Store Error" . $e->getMessage());
+    //             return response()->error($request, null, $e->getMessage(), 500, $startTime);
+    //         }
 
     // }
+
+
+
+
 
     public function subscribePayment(Request $request, $userId)
     {
