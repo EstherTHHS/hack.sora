@@ -18,13 +18,13 @@ class ItemController extends Controller
     public function __construct(ItemService $itemService)
     {
         $this->itemService =$itemService;
-        $this->middleware('permission:itemList', ['only' => 'index']);
-        $this->middleware('permission:itemCreate', ['only' => ['store']]);
-        $this->middleware('permission:itemEdit', ['only' => ['update']]);
-        $this->middleware('permission:itemDelete', ['only' => 'destroy']);
-        $this->middleware('permission:itemShow', ['only' => 'show']);
-        $this->middleware('permission:deleteItemImage', ['only' => 'deleteItemImage']);
-        $this->middleware('permission:getItemByCategory', ['only' => 'getItemByCategory']);
+        // $this->middleware('permission:itemList', ['only' => 'index']);
+        // $this->middleware('permission:itemCreate', ['only' => ['store']]);
+        // $this->middleware('permission:itemEdit', ['only' => ['update']]);
+        // $this->middleware('permission:itemDelete', ['only' => 'destroy']);
+        // $this->middleware('permission:itemShow', ['only' => 'show']);
+        // $this->middleware('permission:deleteItemImage', ['only' => 'deleteItemImage']);
+        // $this->middleware('permission:getItemByCategory', ['only' => 'getItemByCategory']);
 
     }
     /**
