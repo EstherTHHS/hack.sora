@@ -25,8 +25,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('auth/logout', [AuthController::class, 'logout']);
     Route::apiResource('/users', UserController::class);
     Route::apiResource('/items', ItemController::class);
-    Route::apiResource('/subscribe', SubscribeController::class);
-    Route::post('/payment', [SubscribeController::class, 'payment']);
+    Route::apiResource('/subscribe-payment', SubscribeController::class);
+    // Route::post('/payment', [SubscribeController::class, 'payment']);
     Route::delete('delete/item-image/{id}', [ItemController::class, 'deleteItemImage']);
     Route::get('item/category/{category}', [ItemController::class, 'getItemByCategory']);
     Route::post('/users/{id}/status', [UserController::class, 'userStatus']);

@@ -32,6 +32,10 @@ class SubscribeRequest extends FormRequest
             'is_complete'=>'nullable',
             'quantity'=>'required|array',
             'buy_date'=>'required|date',
+            'subscribe_user_id'=>'required',
+            'amount'=>'required',
+            'payment_date'=>'required|date',
+            'payment_method'=>'required'
         ];
     }
 

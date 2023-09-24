@@ -15,7 +15,7 @@ class SubscribeService
         return DB::transaction(function () use ($data) {
             $carts = [];
 
-            foreach ($data['item_id'] as $key=>$item) {
+            foreach ($data['item_id'] as $key => $item) {
                 $status = is_null($data['type'][$key]) ? 0 : 1;
 
                 $userSubscribe = UserSubscribe::create([
@@ -23,6 +23,7 @@ class SubscribeService
                     'item_id' => $item,
                     'type' => $data['type'][$key],
                     'status' =>  $status,
+                    'is_complete'=>1
                 ]);
 
                 $cart = Cart::create([
@@ -34,24 +35,29 @@ class SubscribeService
                 $carts[] = $cart;
             }
 
+
+            Payment::create([
+                'subscribe_user_id'=>$data['user_id'],
+                'amount'=>$data['amount'],
+                'payment_date'=>$data['buy_date'],
+                'payment_method'=>$data['payment_method'],
+            ]);
             return $carts;
         });
     }
 
-    public function payment($data)
-    {
+    // public function payment($data)
+    // {
 
-            $payment = Payment::create($data);
-            $userPayId=$payment->subscribe_user_id;
-            $user_pays=UserSubscribe::where('user_id',$userPayId)->get();
+    //     $payment = Payment::create($data);
+    //     $userPayId = $payment->subscribe_user_id;
+    //     $user_pays = UserSubscribe::where('user_id', $userPayId)->get();
 
-            foreach ($user_pays as $user_pay) {
-                $user_pay->update(['is_complete' => 1]);
-            }
-
-
-            return $payment;
+    //     foreach ($user_pays as $user_pay) {
+    //         $user_pay->update(['is_complete' => 1]);
+    //     }
 
 
-    }
+    //     return $payment;
+    // }
 }
