@@ -25,9 +25,13 @@ class RoleAndPermissionSeeder extends Seeder
         $itemDelete = Permission::create(['name' => 'itemDelete']);
         $itemShow = Permission::create(['name' => 'itemShow']);
         $deleteItemImage = Permission::create(['name' => 'deleteItemImage']);
+        $getItemByCategory = Permission::create(['name' => 'getItemByCategory']);
 
+        $storeSubscribe=Permission::create(['name' => 'storeSubscribe']);
+        $payment=Permission::create(['name' => 'payment']);
 
-        // $userCreate=Permission::create(['name' => 'userCreate']);
+        $userStatus=Permission::create(['name' => 'userStatus']);
+
 
         $admin->givePermissionTo([
 
@@ -37,11 +41,11 @@ class RoleAndPermissionSeeder extends Seeder
             $itemEdit,
             $itemDelete,
             $itemShow,
-            $deleteItemImage
-
-
-
-
+            $deleteItemImage,
+            $getItemByCategory,
+            $storeSubscribe,
+            $payment,
+            $userStatus
 
         ]);
 
@@ -50,13 +54,12 @@ class RoleAndPermissionSeeder extends Seeder
 
 
             $itemList,
-            // $itemCreate,
-            // $itemEdit,
-            // $itemDelete,
+
             $itemShow,
-            // $deleteItemImage
 
-
+            $getItemByCategory,
+            $storeSubscribe,
+            $payment
         ]);
     }
 }

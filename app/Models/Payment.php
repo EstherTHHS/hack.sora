@@ -8,23 +8,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Payment extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'cart_id',
+        'subscribe_user_id',
         'amount',
         'payment_date',
         'payment_method'
     ];
 
-    protected $hidden=[
+    protected $hidden = [
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    public function cart()
+    public function userSubscribe()
     {
-        return $this->belongsTo(Cart::class, 'cart_id');
+        return $this->belongsTo(UserSubscribe::class, 'subscribe_user_id', 'user_id');
     }
 }

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->integer('cart_id');
-            $table->foreignId('amount');
+            $table->foreignId('subscribe_user_id');
+            $table->integer('amount');
             $table->date('payment_date');
             $table->string('payment_method');
             $table->timestamps();
