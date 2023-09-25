@@ -25,7 +25,9 @@ class AdminSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
-            'status'=>1
+            'status'=>1,
+            'phone'=>'09455789277',
+            'address'=>'Main Street'
 
         ]);
 
@@ -33,7 +35,9 @@ class AdminSeeder extends Seeder
             'name' => 'User',
             'email' => 'user@gmail.com',
             'password' => Hash::make('password'),
-            'status'=>1
+            'status'=>1,
+            'phone'=>'09455789277',
+            'address'=>'Main Street'
 
         ]);
 

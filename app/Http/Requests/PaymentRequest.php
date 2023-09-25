@@ -3,13 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Response;
-
 use Illuminate\Http\Exceptions\HttpResponseException;
-
-class RegisterRequest extends FormRequest
+class PaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,14 +24,10 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|confirmed|min:8',
-            'status'=>'',
-            'phone'=>'required',
-            'address'=>'required'
-
+            'subscribe_user_id'=>'required',
+            'amount'=>'required',
+            'payment_date'=>'required|date',
+            'payment_method'=>'required'
         ];
     }
 

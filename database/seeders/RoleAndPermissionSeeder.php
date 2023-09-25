@@ -19,18 +19,46 @@ class RoleAndPermissionSeeder extends Seeder
 
 
 
-        $projectList = Permission::create(['name' => 'projectList']);
-        $projectCreate = Permission::create(['name' => 'projectCreate']);
-        // $userCreate=Permission::create(['name' => 'userCreate']);
+        $itemList = Permission::create(['name' => 'itemList']);
+        $itemCreate = Permission::create(['name' => 'itemCreate']);
+        $itemEdit = Permission::create(['name' => 'itemEdit']);
+        $itemDelete = Permission::create(['name' => 'itemDelete']);
+        $itemShow = Permission::create(['name' => 'itemShow']);
+        $deleteItemImage = Permission::create(['name' => 'deleteItemImage']);
+        $getItemByCategory = Permission::create(['name' => 'getItemByCategory']);
+
+        $storeSubscribe=Permission::create(['name' => 'storeSubscribe']);
+        $payment=Permission::create(['name' => 'payment']);
+
+
+
+
+
+        $userList=Permission::create(['name' => 'userList']);
+        $userShow=Permission::create(['name' => 'userShow']);
+        $userUpdate=Permission::create(['name' => 'userUpdate']);
+        $userDestroy=Permission::create(['name' => 'userDestroy']);
+        $userStatus=Permission::create(['name' => 'userStatus']);
 
         $admin->givePermissionTo([
 
 
-            $projectList,
-            $projectCreate,
+            $itemList,
+            $itemCreate,
+            $itemEdit,
+            $itemDelete,
+            $itemShow,
+            $deleteItemImage,
+            $getItemByCategory,
+            $storeSubscribe,
+            $payment,
 
 
-
+            $userList,
+            $userShow,
+            $userUpdate,
+            $userDestroy,
+            $userStatus
 
         ]);
 
@@ -38,9 +66,13 @@ class RoleAndPermissionSeeder extends Seeder
         $user->givePermissionTo([
 
 
-            $projectList,
+            $itemList,
 
+            $itemShow,
 
+            $getItemByCategory,
+            $storeSubscribe,
+            $payment
         ]);
     }
 }

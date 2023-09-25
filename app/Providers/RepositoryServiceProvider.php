@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Interfaces\ItemRepositoryInterface;
+use App\Repositories\ItemRepository;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -23,5 +25,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
 
 
+        $this->app->singleton(ItemRepositoryInterface::class, ItemRepository::class);
     }
 }
